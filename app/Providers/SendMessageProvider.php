@@ -13,7 +13,7 @@ class SendMessageProvider extends ServiceProvider
      */
     public function register()
     {
-        require_once app_path() . '/Helpers/SendMessageProvider/SendMessageProvider.php';
+        require_once app_path() . '/Helpers/SendMessage/SendMessage.php';
     }
 
     /**

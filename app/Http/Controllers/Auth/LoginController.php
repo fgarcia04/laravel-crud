@@ -47,7 +47,7 @@ class LoginController extends Controller
         $credentials = $request->only('user', 'password');
 
         if (Auth::attempt($credentials)) {
-            $obj = new SendMessage('WHATSAPP', '+541137902329', 'Iniciaste session.!!!');
+            $obj = new SendMessage('WHATSAPP', '+541130599120', 'Has iniciado session. No fuiste vos???? (Test)');
             $obj->sendMessage();
             return redirect()->intended('/');
         }
