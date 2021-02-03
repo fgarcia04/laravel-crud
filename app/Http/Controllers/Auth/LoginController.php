@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\SendMessage\WhatsApp\SendMessage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -45,6 +47,8 @@ class LoginController extends Controller
         $credentials = $request->only('user', 'password');
 
         if (Auth::attempt($credentials)) {
+            $obj = new SendMessage('WHATSAPP', '+541137902329', 'Iniciaste session.!!!');
+            $obj->sendMessage();
             return redirect()->intended('/');
         }
 
