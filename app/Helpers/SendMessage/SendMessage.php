@@ -14,8 +14,8 @@ class SendMessage
     {
         //https:/api.sibila.net/
         $this->crmUser = 'SIBILA_CRM';
-        $this->channel = 'WHATSAPP';
-        $this->phone = '+541137902329';
+        $this->channel = $channel;
+        $this->phone = $phone;
         $this->body = $body;
         $this->client = new Client([
             // Base URI is used with relative requests
@@ -33,6 +33,5 @@ class SendMessage
     private function validateResponse(){
         return $this->response = 'algo';
     }
-
 
 }
