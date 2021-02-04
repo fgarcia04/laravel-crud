@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers\SendMessage\WhatsApp;
+namespace App\Helpers\SendMessage\SendMessage;
 
 use GuzzleHttp\Client;
 

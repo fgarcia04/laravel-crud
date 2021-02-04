@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -58,6 +60,13 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function showRegistrationForm(){
+
+        return view('auth.register', [
+            'user' => new User()
+        ]);
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -74,4 +83,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function update()
+    {
+        die('Hola');
+    }
+
 }

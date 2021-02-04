@@ -17,4 +17,8 @@ Auth::routes();
 
 Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
 
+Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+
+Route::patch('update', [App\Http\Controllers\Auth\RegisterController::class, 'update'])->name('update');
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
