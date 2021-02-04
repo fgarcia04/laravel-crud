@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->nullable(false);
             $table->string('email')->unique()->nullable(false);
             $table->string('password')->nullable(false);
-            $table->integer('id_sibila')->nullable(false);
+            $table->bigInteger('id_sibila')->nullable(false);
             $table->rememberToken();
             $table->timestamps();
         });

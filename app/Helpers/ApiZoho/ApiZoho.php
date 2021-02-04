@@ -59,7 +59,7 @@ class ApiZoho
 
     private function generateToken()
     {
-        return 'Zoho-oauthtoken 1000.61de2bbe715b5257eef8fd0e2e6767b9.30d4a04c3c5baaaa3ec5600ec3b602b0';
+        return 'Zoho-oauthtoken 1000.3e188c3247f0b5be765bd99ba2e12ab2.76e102a344eb65c61ee43fdb4295474e';
     }
 
     private function contentJsonToArray()
