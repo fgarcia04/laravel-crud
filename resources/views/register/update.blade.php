@@ -9,7 +9,8 @@
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('update') }}">
-                            @method('PATCH')
+
+                            @csrf @method('PATCH')
 
                             @include('register._form')
 

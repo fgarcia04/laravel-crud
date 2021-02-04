@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
+Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('login');
 
 Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 

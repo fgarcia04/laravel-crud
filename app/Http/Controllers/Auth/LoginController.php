@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Helpers\SendMessage\SendMessage\SendMessage;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -49,12 +50,13 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             /*$obj = new SendMessage('WHATSAPP', '+541130599120', 'Has iniciado session. No fuiste vos???? (Test)');
             $obj->sendMessage();*/
-            return redirect()->intended('/');
+            $request->session()->regenerateToken();
+            return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-        return redirect('login')->with('message', 'Oppes! You have entered invalid credentials');
+        return back()->withErrors(['user' => trans('auth.failed')])
+            ->withInput(request(['user']));
+
     }
-
-
 
 }
