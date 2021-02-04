@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\ApiZoho\ApiZoho\ApiZoho;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -76,6 +77,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $obj = new ApiZoho('Leads');
+        $obj->getRecords();
+        dd($obj->response);
         return User::create([
             'user' => $data['user'],
             'name' => $data['name'],

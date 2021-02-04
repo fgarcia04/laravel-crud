@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Carbon;
+
 return [
 
     /*
@@ -16,5 +18,6 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'login_alert' => 'Today at ' . Carbon::now()->format(' H:i:s') . ', we detect a new income to your account.',
 
 ];

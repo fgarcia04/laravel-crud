@@ -13,7 +13,7 @@ class ApiZohoProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        require_once app_path() . '/Helpers/ApiZoho/ApiZoho.php';
     }
 
     /**

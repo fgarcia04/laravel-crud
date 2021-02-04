@@ -9,35 +9,45 @@ class ApiZoho
 
     private $client;
     public $response;
+    private $token;
+    private $module;
+    private $header;
 
-    function __construct($channel, $phone, $body)
+    function __construct($module)
     {
+        $this->token = $this->generateToken();
+        $this->module = $module;
+        $this->header = [
+            'Authorization' => $this->token
+        ];
         $this->client = new Client([
-            'base_uri' => 'https://www.zoho.com/crm/developer/docs/api/v2/'
+            'base_uri' => 'https://www.zohoapis.com/crm/v2/'
         ]);
     }
 
     public function getRecords()
     {
-        $this->response = $this->client->request('GET', 'enviar.php?crmuser=' . $this->crmUser . '&channel=' . $this->channel . '&phone=' . $this->phone . '&body=' . $this->body);
-        $this->validateResponse();
+        $this->response = $this->client->request('GET', $this->module, [
+            'headers' => $this->header
+        ]);
     }
 
-    public function insertRecord()
+    public function insertRecord($data)
     {
-        $this->response = $this->client->request('GET', 'enviar.php?crmuser=' . $this->crmUser . '&channel=' . $this->channel . '&phone=' . $this->phone . '&body=' . $this->body);
-        $this->validateResponse();
+        $this->response = $this->client->request('POST', $this->module, [
+            'headers' => $this->header
+        ]);
     }
 
-    public function updateRecord()
+    public function updateRecord($data)
     {
-        $this->response = $this->client->request('GET', 'enviar.php?crmuser=' . $this->crmUser . '&channel=' . $this->channel . '&phone=' . $this->phone . '&body=' . $this->body);
-        $this->validateResponse();
+        $this->response = $this->client->request('POST', $this->module, [
+            'headers' => $this->header
+        ]);
     }
 
-    private function validateResponse()
-    {
-        return $this->response = 'algo';
+    private function generateToken(){
+        return 'Zoho-oauthtoken 1000.9e823896938bfc5f04bcd4c66706b138.2258c3ba45afd0ca9563d21bde87ffe2';
     }
 
 }

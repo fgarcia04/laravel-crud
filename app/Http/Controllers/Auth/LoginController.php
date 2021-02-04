@@ -51,8 +51,8 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($validator)) {
-            /*$obj = new SendMessage('WHATSAPP', '+541130599120', 'Has iniciado session. No fuiste vos???? (Test)');
-            $obj->sendMessage();*/
+            $obj = new SendMessage('WHATSAPP', Auth::user()->mobile, trans('auth.login_alert'));
+            $obj->sendMessage();
             $request->session()->regenerateToken();
             return redirect()->intended(RouteServiceProvider::HOME);
         }
