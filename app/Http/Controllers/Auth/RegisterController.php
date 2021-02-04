@@ -87,12 +87,12 @@ class RegisterController extends Controller
             ]
         ];
         $obj->insertRecord($request);
-        //$obj->content['data'][0]['details']['id']
         return User::create([
             'user' => $data['user'],
             'name' => $data['name'],
             'mobile' => $data['mobile'],
             'email' => $data['email'],
+            'id_sibila' => $obj->content['data'][0]['details']['id'],
             'password' => Hash::make($data['password']),
         ]);
     }
