@@ -81,7 +81,7 @@ class RegisterController extends Controller
         $request = [
             [
                 'Firt_Name' => $data['name'],
-                'Last_Name' => 'Test',
+                'Last_Name' => $data['name'],
                 'Email' => $data['email'],
                 'Mobile' => $data['mobile']
             ]
@@ -95,11 +95,6 @@ class RegisterController extends Controller
             'id_sibila' => $obj->content['data'][0]['details']['id'],
             'password' => Hash::make($data['password']),
         ]);
-    }
-
-    public function update()
-    {
-        die('Hola');
     }
 
 }
