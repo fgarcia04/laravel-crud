@@ -45,9 +45,12 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
 
-        $credentials = $request->only('user', 'password');
+        $validator = $request->validate([
+            'user' => 'required|max:255',
+            'password' => 'required|max:255',
+        ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($validator)) {
             /*$obj = new SendMessage('WHATSAPP', '+541130599120', 'Has iniciado session. No fuiste vos???? (Test)');
             $obj->sendMessage();*/
             $request->session()->regenerateToken();
