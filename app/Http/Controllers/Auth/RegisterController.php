@@ -78,8 +78,16 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $obj = new ApiZoho('Leads');
-        $obj->getRecords();
-        dd($obj->response);
+        $request = [
+            [
+                'Firt_Name' => $data['name'],
+                'Last_Name' => 'Test',
+                'Email' => $data['email'],
+                'Mobile' => $data['mobile']
+            ]
+        ];
+        $obj->insertRecord($request);
+        //$obj->content['data'][0]['details']['id']
         return User::create([
             'user' => $data['user'],
             'name' => $data['name'],

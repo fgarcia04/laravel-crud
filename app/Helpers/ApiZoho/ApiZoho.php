@@ -9,6 +9,7 @@ class ApiZoho
 
     private $client;
     public $response;
+    public $content;
     private $token;
     private $module;
     private $header;
@@ -30,13 +31,22 @@ class ApiZoho
         $this->response = $this->client->request('GET', $this->module, [
             'headers' => $this->header
         ]);
+        $this->contentJsonToArray();
     }
 
-    public function insertRecord($data)
+    public function insertRecord($body)
     {
+        $data['data'] = $body;
+        $data['trigger'] = [
+            'approval',
+            'workflow',
+            'blueprint'
+        ];
         $this->response = $this->client->request('POST', $this->module, [
-            'headers' => $this->header
+            'headers' => $this->header,
+            'json' => $data
         ]);
+        $this->contentJsonToArray();
     }
 
     public function updateRecord($data)
@@ -44,10 +54,17 @@ class ApiZoho
         $this->response = $this->client->request('POST', $this->module, [
             'headers' => $this->header
         ]);
+        $this->contentJsonToArray();
     }
 
-    private function generateToken(){
-        return 'Zoho-oauthtoken 1000.9e823896938bfc5f04bcd4c66706b138.2258c3ba45afd0ca9563d21bde87ffe2';
+    private function generateToken()
+    {
+        return 'Zoho-oauthtoken 1000.61de2bbe715b5257eef8fd0e2e6767b9.30d4a04c3c5baaaa3ec5600ec3b602b0';
+    }
+
+    private function contentJsonToArray()
+    {
+        $this->content = json_decode($this->response->getBody()->getContents(), true);
     }
 
 }
