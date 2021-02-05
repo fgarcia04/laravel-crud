@@ -28,7 +28,7 @@ class SendMessage
         try {
             //$this->response = $this->client->request('GET', 'enviar.php?crmuser=' . $this->crmUser . '&channel=' . $this->channel . '&phone=' . $this->phone . '&body=' . $this->body);
         }catch (ConnectException $e){
-            throw new CustomException($e->getMessage());
+            throw new CustomException($e->getMessage(),);
         }
     }
 

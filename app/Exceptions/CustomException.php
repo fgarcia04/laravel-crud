@@ -27,12 +27,16 @@ class CustomException extends Exception
      * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function render($a)
+    public function render()
     {
         Auth::logout();
-        return Redirect::to('login')
-            ->withInput()
-            ->withErrors(['user' => trans('error.generic_error')]);
+        return back()->withErrors(['user' => trans('error.generic_error')])
+            ->withInput(request([
+                'user',
+                'name',
+                'mobile',
+                'email',
+            ]));
     }
 
 }

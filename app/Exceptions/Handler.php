@@ -38,9 +38,9 @@ class Handler extends ExceptionHandler
             //
         });
 
-        $this->renderable(function (Exception $e, $request) {
+        $this->renderable(function (Exception $e) {
             if ($e instanceof CustomException)  {
-                return $e->render($request);
+                return $e->render();
             }
         });
 

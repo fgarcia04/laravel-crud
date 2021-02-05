@@ -2,7 +2,9 @@
 
 namespace App\Helpers\ApiZoho\ApiZoho;
 
+use App\Exceptions\CustomException;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ConnectException;
 
 class ApiZoho
 {
@@ -21,40 +23,40 @@ class ApiZoho
         $this->header = [
             'Authorization' => $this->token
         ];
-        $this->client = new Client([
-            'base_uri' => 'https://www.zohoapis.com/crm/v2/'
-        ]);
-    }
-
-    public function getRecords()
-    {
-        $this->response = $this->client->request('GET', $this->module, [
-            'headers' => $this->header
-        ]);
-        $this->contentJsonToArray();
+/*        $this->client = new Client([
+            'base_uri' => 'https://www.zohoapiaas.com/crm/v2/'
+        ]);*/
     }
 
     public function insertRecord($body)
     {
-        $data['data'] = $body;
-        $data['trigger'] = [
-            'approval',
-            'workflow',
-            'blueprint'
-        ];
-        $this->response = $this->client->request('POST', $this->module, [
-            'headers' => $this->header,
-            'json' => $data
-        ]);
-        $this->contentJsonToArray();
+        try{
+            $data['data'] = $body;
+            $data['trigger'] = [
+                'approval',
+                'workflow',
+                'blueprint'
+            ];
+           /* $this->response = $this->client->request('POST', $this->module, [
+                'headers' => $this->header,
+                'json' => $data
+            ]);
+            $this->contentJsonToArray();*/
+        }catch (ConnectException $e){
+            throw new CustomException($e->getMessage());
+        }
     }
 
     public function updateRecord($data)
     {
-        $this->response = $this->client->request('POST', $this->module, [
-            'headers' => $this->header
-        ]);
-        $this->contentJsonToArray();
+        try{
+         /*   $this->response = $this->client->request('POST', $this->module, [
+                'headers' => $this->header
+            ]);
+            $this->contentJsonToArray();*/
+        }catch (ConnectException $e){
+            throw new CustomException($e->getMessage());
+        }
     }
 
     private function generateToken()
