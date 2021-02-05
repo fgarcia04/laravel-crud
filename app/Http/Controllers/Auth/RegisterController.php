@@ -6,6 +6,8 @@ use App\Helpers\ApiZoho\ApiZoho\ApiZoho;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Rules\LowerCase;
+use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -53,9 +55,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'user' => ['required', 'string', 'max:255', 'unique:users'],
+            'user' => ['required', 'alpha_num', 'max:255', 'unique:users', new LowerCase],
             'name' => ['required', 'string', 'max:255'],
-            'mobile' => ['required', 'string', 'max:255'],
+            'mobile' => ['required', 'string', 'max:255', new PhoneNumber],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -77,22 +79,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $obj = new ApiZoho('Leads');
-        $request = [
-            [
-                'Firt_Name' => $data['name'],
-                'Last_Name' => $data['name'],
-                'Email' => $data['email'],
-                'Mobile' => $data['mobile']
-            ]
-        ];
-        $obj->insertRecord($request);
+        /*        $obj = new ApiZoho('Leads');
+                $request = [
+                    [
+                        'Firt_Name' => $data['name'],
+                        'Last_Name' => $data['name'],
+                        'Email' => $data['email'],
+                        'Mobile' => $data['mobile']
+                    ]
+                ];
+                $obj->insertRecord($request);*/
         return User::create([
-            'user' => $data['user'],
+            'user' => strtolower($data['user']),
             'name' => $data['name'],
             'mobile' => $data['mobile'],
             'email' => $data['email'],
-            'id_sibila' => $obj->content['data'][0]['details']['id'],
+            'id_sibila' => 1,//$obj->content['data'][0]['details']['id'],
             'password' => Hash::make($data['password']),
         ]);
     }

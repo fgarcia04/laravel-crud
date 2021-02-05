@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Exception;
 
 class Handler extends ExceptionHandler
 {
@@ -36,5 +37,12 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
+        $this->renderable(function (Exception $e, $request) {
+            if ($e instanceof CustomException)  {
+                return $e->render($request);
+            }
+        });
+
     }
 }

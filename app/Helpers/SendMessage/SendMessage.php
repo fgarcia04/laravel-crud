@@ -2,8 +2,9 @@
 
 namespace App\Helpers\SendMessage\SendMessage;
 
+use App\Exceptions\CustomException;
 use GuzzleHttp\Client;
-use PHPUnit\Exception;
+use GuzzleHttp\Exception\ConnectException;
 
 class SendMessage
 {
@@ -17,14 +18,18 @@ class SendMessage
         $this->channel = $channel;
         $this->phone = $phone;
         $this->body = $body;
-        $this->client = new Client([
+        /*$this->client = new Client([
             'base_uri' => 'https:/api.sibila.net/'
-        ]);
+        ]);*/
     }
 
     public function sendMessage()
     {
-        $this->response = $this->client->request('GET', 'enviar.php?crmuser=' . $this->crmUser . '&channel=' . $this->channel . '&phone=' . $this->phone . '&body=' . $this->body);
+        try {
+            //$this->response = $this->client->request('GET', 'enviar.php?crmuser=' . $this->crmUser . '&channel=' . $this->channel . '&phone=' . $this->phone . '&body=' . $this->body);
+        }catch (ConnectException $e){
+            throw new CustomException($e->getMessage());
+        }
     }
 
 }

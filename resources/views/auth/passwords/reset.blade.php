@@ -20,7 +20,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                           value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                           value="{{ $email ?? old('email') }}" required autocomplete="off" autofocus>
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -37,7 +37,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                            class="form-control @error('password') is-invalid @enderror" name="password"
-                                           required autocomplete="new-password">
+                                           required autocomplete="off">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -53,7 +53,7 @@
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
-                                           name="password_confirmation" required autocomplete="new-password">
+                                           name="password_confirmation" required autocomplete="off">
                                 </div>
                             </div>
 
